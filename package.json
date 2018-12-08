@@ -1,0 +1,26 @@
+{
+  "name": "ScraperApp",
+  "version": "1.0.0",
+  "description": "This app utilizes a mongo db (created in mongoose) and express to scrape data from the NY Times",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AjaMag/ScraperApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AjaMag/ScraperApp/issues"
+  },
+  "homepage": "https://github.com/AjaMag/ScraperApp#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.15"
+  }
+}

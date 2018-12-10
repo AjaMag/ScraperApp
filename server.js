@@ -33,7 +33,7 @@ axios
   const $ = cheerio.load(r.data);
   const headers = $(".imors3-0.iuScIP").each((i, elem) => 
   console.log($(elem).text()))
-  $('#articles').append($(headers))
+  $('#articles').append($(elem).text())
 })
 .catch(e => console.log(e));
 

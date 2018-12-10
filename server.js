@@ -27,13 +27,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 //request
-// axios
-//   .get("http://reddit.com/")
-//   .then(r => {
-//     const $ = cheerio.load(r.data);
-//     const headers = $(".imors3-0.iuScIP").each((i, elem) => console.log($(elem).text()))
-//   })
-//   .catch(e => console.log(e));
+axios
+  .get("http://reddit.com/")
+  .then(r => {
+    const $ = cheerio.load(r.data);
+    const headers = $(".imors3-0.iuScIP").each((i, elem) => console.log($(elem).text()))
+  })
+  .catch(e => console.log(e));
 
 // Headline - the title of the article
 // Summary - a short summary of the article

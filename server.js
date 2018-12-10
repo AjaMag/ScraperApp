@@ -24,7 +24,7 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 //request
 // axios
@@ -46,4 +46,5 @@ app.use(express.static("public"));
 
 // })
 
-
+const PORT = process.env.PORT || 5000
+app.listen(PORT, _ => console.log(`http://localhost:${PORT}`))

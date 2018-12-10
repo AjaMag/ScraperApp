@@ -4,8 +4,10 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const bodyparser = require('body-parser')
+const path = require('path')
 
-var app = express();
+const app = express();
 
 // Require all models
 // var db = require("./models");

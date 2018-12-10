@@ -43,6 +43,6 @@ axios
 
 // Connect to the Mongo DB
 mongoose.connect(
-  "mongodb://localhost/mongoHeadlines",
+  "mongodb://localhost/test",
   { useNewUrlParser: true }
 );

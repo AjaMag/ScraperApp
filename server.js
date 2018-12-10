@@ -9,6 +9,12 @@ const path = require('path')
 
 const app = express();
 
+// Connect to the Mongo DB
+mongoose.connect(
+    "mongodb://localhost/test",
+    { useNewUrlParser: true }
+  );
+
 // Require all models
 // var db = require("./models");
 
@@ -20,15 +26,14 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-//routes
-
-axios
-  .get("http://reddit.com/")
-  .then(r => {
-    const $ = cheerio.load(r.data);
-    const headers = $(".imors3-0.iuScIP").each((i, elem) => console.log($(elem).text()))
-  })
-  .catch(e => console.log(e));
+//request
+// axios
+//   .get("http://reddit.com/")
+//   .then(r => {
+//     const $ = cheerio.load(r.data);
+//     const headers = $(".imors3-0.iuScIP").each((i, elem) => console.log($(elem).text()))
+//   })
+//   .catch(e => console.log(e));
 
 // Headline - the title of the article
 // Summary - a short summary of the article
@@ -41,8 +46,4 @@ axios
 
 // })
 
-// Connect to the Mongo DB
-mongoose.connect(
-  "mongodb://localhost/test",
-  { useNewUrlParser: true }
-);
+

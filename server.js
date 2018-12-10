@@ -33,7 +33,7 @@ axios
   const $ = cheerio.load(r.data);
   const header = $(".SQnoC3ObvgnGjWt90zD9Z").each((i, elem) => {
     console.log(`Title: ${$(elem).text()}`)
-    console.log(`Link: ${$(elem).attr('href')} \n`)
+    console.log(`Link: http://reddit.com/${$(elem).attr('href')} \n`)
   })
 })
 .catch(e => console.log(e));

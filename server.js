@@ -31,9 +31,10 @@ axios
 .get("http://reddit.com/")
 .then(r => {
   const $ = cheerio.load(r.data);
-  const headers = $(".imors3-0.iuScIP").each((i, elem) => 
-  console.log($(elem).text()))
-  $('#articles').append(headers)
+  const header = $(".SQnoC3ObvgnGjWt90zD9Z").each((i, elem) => {
+    console.log(`Title: ${$(elem).text()}`)
+    console.log(`Link: ${$(elem).attr('href')} \n`)
+  })
 })
 .catch(e => console.log(e));
 

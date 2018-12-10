@@ -26,15 +26,30 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-//request
+//scrape the articles
 axios
-  .get("http://reddit.com/")
-  .then(r => {
-    const $ = cheerio.load(r.data);
-    const headers = $(".imors3-0.iuScIP").each((i, elem) => console.log($(elem).text()))
-  })
-  .catch(e => console.log(e));
+.get("http://reddit.com/")
+.then(r => {
+  const $ = cheerio.load(r.data);
+  const headers = $(".imors3-0.iuScIP").each((i, elem) => 
+  console.log($(elem).text()))
+  $('#articles').append($(headers))
+})
+.catch(e => console.log(e));
 
+// // Route for getting all Articles from the db
+// app.get("/articles", function(req, res) {
+//   // Grab every document in the Articles collection
+//   db.Article.find({})
+//     .then(function(dbArticle) {
+//       // If we were able to successfully find Articles, send them back to the client
+//       res.json(dbArticle);
+//     })
+//     .catch(function(err) {
+//       // If an error occurred, send it to the client
+//       res.json(err);
+//     });
+// });  
 // Headline - the title of the article
 // Summary - a short summary of the article
 // URL - the url to the original article

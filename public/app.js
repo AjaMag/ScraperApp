@@ -2,7 +2,6 @@
 
 // Grab the articles as a json
 const scrapeArticles = () => {
-    console.log("ping")
     $.getJSON('/scrape')
     .then((data)=> {
     console.log(data)  

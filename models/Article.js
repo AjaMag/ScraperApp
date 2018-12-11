@@ -13,11 +13,6 @@ const ArticleSchema = new Schema({
         required: true,
         unique: true
     },
-    summary: {
-        type: String,
-        required: true,
-        unique: true
-    },
     saved: {
         type: Boolean,
         default: false

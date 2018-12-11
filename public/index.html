@@ -39,20 +39,24 @@
         font-size: 18px;
       }
       .jumbotron {
-        -webkit-background-size: 50%;
+        -webkit-background-size: 100%;
         background-image: url('https://vignette.wikia.nocookie.net/speedracer/images/1/10/Reddit.png/revision/latest?cb=20170820160213');
-        -moz-background-size: 50%;
-        -o-background-size: 50%;
-        height: 100%;
-      }
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-repeat: no-repeat;
+        background-size: 13rem;
+     }
      .bkgrnd-blu {
         background-color: rgb(99, 173, 241);
+     } 
+     .bkgrnd-orng {
+        background-color: rgb(255, 88, 10);
      } 
     .center {
         text-align: center;
     }
     .shadow {
-        text-shadow: 0.25rem 0.25rem white;
+        text-shadow: 0.12rem 0.12rem white;
     }
 
     </style>
@@ -83,10 +87,10 @@
         </div>
       </nav>
   <body>
-    <div class="jumbotron">
+    <div class="jumbotron bkgrnd-orng shadow">
       <div class="container center">
         <h1>Mongo Scraper</h1>  
-        <h3>Get the latest headlines and stories from Reddit.com!</h3>    
+        <h3>Get the latest stories from Reddit.com!</h3>    
         <p></p>
       </div>
     </div>  

@@ -10,42 +10,38 @@ module.exports = (app) => {
         .then(r => {
           const $ = cheerio.load(r.data);
           $(".SQnoC3ObvgnGjWt90zD9Z").each((i, elem) => {
-            //let result = {}  
+            let result = {}  
             const title = (`Title: ${$(elem).text()}`)
             const link = (`Link: http://reddit.com/${$(elem).attr('href')} \n`)
-      
-            // result.title = title
-            // result.link = link 
-      
-            console.log(title)
-            console.log(link )
+            result.title = title
+            result.link = link 
+        
+           
+        //create new Article in db
+        db.Article.create(result)
+        .then(function(dbArticle) {
+            console.log(`article scraped: ${dbArticle}`)
+            })
+            .catch((e) => {console.log(`error when trying to save to db: ${e}`) 
+              })
           })
-        })      
-          //   create new Article in db
-//           db.Article.create(result)
-//             .then((dbArticle) => {
-//                 console.log(`\narticle scraped: ${dbArticle}`)
-//             })
-//             .catch((e) => {console.log(`\nerror when trying to save to db: ${e}`) 
-//               })
-//           })
-//           res.redirect('/articles');
-//         })
-//         .catch(e => console.log(e));
-//         })
+        })  
+    }) 
+    
+}
 
-// save article
-app.post('/article/:id', (req, res)=>{
-    let id = req.params.id;
+//save article
+// app.post('/article/:id', (req, res)=>{
+//     let id = req.params.id;
 
-    db.Article.findByIdAndUpdate(id, {$set: {saved: true}})
-    .then((dbArticle)=>{
-        res.json(dbArticle);
-    })
-    .catch((err)=>{
-        res.json(err);
-    });
-});
+//     db.Article.findByIdAndUpdate(id, {$set: {saved: true}})
+//     .then((dbArticle)=>{
+//         res.json(dbArticle);
+//     })
+//     .catch((err)=>{
+//         res.json(err);
+//     });
+// });
 // // show articles after scraping
 // app.get('/articles', (req, res)=> {
 //     db.Article.find({})
@@ -59,6 +55,6 @@ app.post('/article/:id', (req, res)=>{
 //         res.json(e);
 //    });
 //     });
-})
-}
+// })
+// }
 

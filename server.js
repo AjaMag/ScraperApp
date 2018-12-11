@@ -5,6 +5,7 @@ const bodyparser = require('body-parser')
 const path = require('path')
 const mongoose = require('mongoose')
 var app = express();
+mongoose.set('useCreateIndex', true)
 require('./routes/routes')(app)
 
 // Require all models

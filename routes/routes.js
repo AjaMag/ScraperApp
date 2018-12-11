@@ -2,7 +2,6 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const db = require('../models')
 
-
 module.exports = (app) => {
 //Scrape the articles and post to db
     app.get("/scrape", function(req, res) {
@@ -11,44 +10,55 @@ module.exports = (app) => {
         .then(r => {
           const $ = cheerio.load(r.data);
           $(".SQnoC3ObvgnGjWt90zD9Z").each((i, elem) => {
-            let result = {}  
+            //let result = {}  
             const title = (`Title: ${$(elem).text()}`)
             const link = (`Link: http://reddit.com/${$(elem).attr('href')} \n`)
       
-            result.title = title
-            result.link = link 
+            // result.title = title
+            // result.link = link 
       
             console.log(title)
-            console.log(link)
-      
-          //   create new Article in db
-          db.Article.create(result)
-            .then((dbArticle) => {
-                console.log(`\narticle scraped: ${dbArticle}`)
-            })
-            .catch((e) => {console.log(`\nerror when trying to save to db: ${e}`) 
-              })
+            console.log(link )
           })
-          res.redirect('/articles');
-        })
-        .catch(e => console.log(e));
-        })
-// show articles after scraping
-app.get('/articles', (req, res)=>{
-    db.Article.find({})
-    .sort({timestamp: -1})
-    .then((dbArticle)=>{
-        let articleObj = {article: dbArticle};
+        })      
+          //   create new Article in db
+//           db.Article.create(result)
+//             .then((dbArticle) => {
+//                 console.log(`\narticle scraped: ${dbArticle}`)
+//             })
+//             .catch((e) => {console.log(`\nerror when trying to save to db: ${e}`) 
+//               })
+//           })
+//           res.redirect('/articles');
+//         })
+//         .catch(e => console.log(e));
+//         })
 
-        // render page with articles found
-        res.render('index', articleObj);
+// save article
+app.post('/article/:id', (req, res)=>{
+    let id = req.params.id;
+
+    db.Article.findByIdAndUpdate(id, {$set: {saved: true}})
+    .then((dbArticle)=>{
+        res.json(dbArticle);
     })
     .catch((err)=>{
         res.json(err);
     });
 });
+// // show articles after scraping
+// app.get('/articles', (req, res)=> {
+//     db.Article.find({})
+//     .then((dbArticle)=>{
+//         let articleObj = {article: dbArticle};
 
-
+//         // render page with articles found
+//         res.render('index', articleObj);
+//     })
+//     .catch((e)=>{
+//         res.json(e);
+//    });
+//     });
+})
 }
-
 

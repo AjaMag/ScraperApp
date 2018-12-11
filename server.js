@@ -1,42 +1,29 @@
 //All dependencies to log, render, and fetch data, etc..
 const express = require("express");
-const cheerio = require("cheerio");
-const axios = require("axios");
 const logger = require("morgan");
-const mongoose = require("mongoose");
 const bodyparser = require('body-parser')
 const path = require('path')
+const mongoose = require('mongoose')
+var app = express();
+require('./routes/routes')(app)
 
-const app = express();
-
+// Require all models
+var db = require("./models");
 // Connect to the Mongo DB
 mongoose.connect(
     "mongodb://localhost/test",
     { useNewUrlParser: true }
   );
 
-// Require all models
-// var db = require("./models");
-
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-//scrape the articles
-axios
-.get("http://reddit.com/")
-.then(r => {
-  const $ = cheerio.load(r.data);
-  const header = $(".SQnoC3ObvgnGjWt90zD9Z").each((i, elem) => {
-    console.log(`Title: ${$(elem).text()}`)
-    console.log(`Link: http://reddit.com/${$(elem).attr('href')} \n`)
-  })
-})
-.catch(e => console.log(e));
+
 
 // // Route for getting all Articles from the db
 // app.get("/articles", function(req, res) {

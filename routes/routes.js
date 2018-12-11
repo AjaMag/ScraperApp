@@ -18,43 +18,31 @@ module.exports = (app) => {
         
            
         //create new Article in db
-        db.Article.create(result)
-        .then(function(dbArticle) {
-            console.log(`article scraped: ${dbArticle}`)
-            })
-            .catch((e) => {console.log(`error when trying to save to db: ${e}`) 
-              })
+        // db.Article.create(result)
+        // .then(function(dbArticle) {
+        //     console.log(`article scraped: ${dbArticle}`)
+        //     })
+        //     .catch((e) => {console.log(`error when trying to save to db: ${e}`) 
+        //       })
           })
         })  
     }) 
+    // Route to get all Articles from the db
+    app.get("/articles", function(req, res) {
+    // Grab every document in the Articles collection
+      db.Article.find({})
+      .then(function(dbArticle) {
+        // If we were able to successfully find Articles, send them back to the client
+        res.json(dbArticle);
+        console.log(dbArticle)
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+    });
+
     
 }
 
-//save article
-// app.post('/article/:id', (req, res)=>{
-//     let id = req.params.id;
-
-//     db.Article.findByIdAndUpdate(id, {$set: {saved: true}})
-//     .then((dbArticle)=>{
-//         res.json(dbArticle);
-//     })
-//     .catch((err)=>{
-//         res.json(err);
-//     });
-// });
-// // show articles after scraping
-// app.get('/articles', (req, res)=> {
-//     db.Article.find({})
-//     .then((dbArticle)=>{
-//         let articleObj = {article: dbArticle};
-
-//         // render page with articles found
-//         res.render('index', articleObj);
-//     })
-//     .catch((e)=>{
-//         res.json(e);
-//    });
-//     });
-// })
-// }
 

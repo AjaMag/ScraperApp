@@ -10,11 +10,16 @@ const scrapeArticles = () => {
 scrapeArticles()
 
 const postArticles = () => {
-    $.getJSON('/articles')
-    .then((data)=> {
-    console.log(data)  
+    $.getJSON('/articles', function(data){
+        for ( var i =0; i < data.length; i++) {
+            $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>")
+        }
     })
-  };
+}
+//Adding an onlcick listener
+//$(document).on("click", "p", function() {
+
+
 
 postArticles()
 
